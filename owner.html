@@ -1,0 +1,2942 @@
+```html
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+หลังร้าน | สามสหายอิ่มอร่อย
+</title>
+
+
+<style>
+
+:root{
+
+    --pink:#e95d86;
+    --bg:#fff8fb;
+    --dark:#352b2e;
+    --line:#ead9df;
+    --green:#25a55f;
+    --yellow:#f3ad32;
+    --red:#df4c5d;
+    --blue:#3687c8;
+
+}
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+
+    background:var(--bg);
+
+    color:var(--dark);
+
+    font-family:
+        Arial,
+        "Noto Sans Thai",
+        sans-serif;
+
+}
+
+
+button,
+input,
+select,
+textarea{
+
+    font:inherit;
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.login{
+
+    max-width:420px;
+
+    margin:80px auto;
+
+    background:white;
+
+    padding:24px;
+
+    border:1px solid var(--line);
+
+    border-radius:18px;
+
+    text-align:center;
+
+}
+
+
+.login h2{
+
+    color:var(--pink);
+
+}
+
+
+.login input{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid var(--line);
+
+    border-radius:10px;
+
+    margin:10px 0;
+
+}
+
+
+/* =====================================================
+   TOP
+===================================================== */
+
+.top{
+
+    background:white;
+
+    border-bottom:1px solid var(--line);
+
+    padding:14px 18px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:10;
+
+}
+
+
+.top h1{
+
+    font-size:20px;
+
+    flex:1;
+
+    margin:0;
+
+    color:var(--pink);
+
+}
+
+
+.back{
+
+    border:1px solid var(--line);
+
+    background:white;
+
+    border-radius:10px;
+
+    padding:8px 12px;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.wrap{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:18px;
+
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+
+}
+
+
+.stat{
+
+    background:white;
+
+    border:1px solid var(--line);
+
+    border-radius:16px;
+
+    padding:16px;
+
+}
+
+
+.stat small{
+
+    color:#8c777d;
+
+}
+
+
+.stat b{
+
+    font-size:26px;
+
+    display:block;
+
+    margin-top:5px;
+
+    color:var(--pink);
+
+}
+
+
+/* =====================================================
+   PANEL
+===================================================== */
+
+.panel{
+
+    background:white;
+
+    border:1px solid var(--line);
+
+    border-radius:16px;
+
+    margin-top:16px;
+
+    padding:16px;
+
+}
+
+
+.panel h2{
+
+    margin-top:0;
+
+}
+
+
+/* =====================================================
+   ORDER
+===================================================== */
+
+.order{
+
+    border:1px solid var(--line);
+
+    border-radius:14px;
+
+    padding:14px;
+
+    margin:10px 0;
+
+    background:#fff;
+
+}
+
+
+.order.cancelled{
+
+    opacity:.75;
+
+    background:#fff5f5;
+
+}
+
+
+.orderhead{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:8px;
+
+    align-items:center;
+
+}
+
+
+.orderqueue{
+
+    font-size:20px;
+
+    color:var(--pink);
+
+}
+
+
+.tag{
+
+    border-radius:99px;
+
+    padding:5px 10px;
+
+    font-size:12px;
+
+    display:inline-block;
+
+}
+
+
+.wait{
+
+    background:#fff0c9;
+
+    color:#936300;
+
+}
+
+
+.cook{
+
+    background:#dff0ff;
+
+    color:#12639a;
+
+}
+
+
+.done{
+
+    background:#ddf5e6;
+
+    color:#17763e;
+
+}
+
+
+.cancel{
+
+    background:#ffe1e4;
+
+    color:#b42334;
+
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.btn{
+
+    border:0;
+
+    border-radius:10px;
+
+    padding:9px 12px;
+
+    cursor:pointer;
+
+    margin-top:5px;
+
+}
+
+
+.pink{
+
+    background:var(--pink);
+
+    color:white;
+
+}
+
+
+.green{
+
+    background:var(--green);
+
+    color:white;
+
+}
+
+
+.yellow{
+
+    background:var(--yellow);
+
+    color:white;
+
+}
+
+
+.red{
+
+    background:var(--red);
+
+    color:white;
+
+}
+
+
+.blue{
+
+    background:var(--blue);
+
+    color:white;
+
+}
+
+
+.gray{
+
+    background:#f4eef0;
+
+}
+
+
+/* =====================================================
+   MENU ADMIN
+===================================================== */
+
+.menuadmin{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+}
+
+
+.mcard{
+
+    border:1px solid var(--line);
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    background:white;
+
+}
+
+
+.mcard img{
+
+    width:100%;
+
+    height:130px;
+
+    object-fit:cover;
+
+}
+
+
+.mcard div{
+
+    padding:10px;
+
+}
+
+
+.mcard h3{
+
+    margin:0 0 5px;
+
+}
+
+
+.mcard .actions{
+
+    display:flex;
+
+    gap:6px;
+
+    margin-top:8px;
+
+    flex-wrap:wrap;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.formgrid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:10px;
+
+}
+
+
+.formgrid input,
+.formgrid select,
+.formgrid textarea{
+
+    width:100%;
+
+    padding:10px;
+
+    border:1px solid var(--line);
+
+    border-radius:10px;
+
+}
+
+
+.full{
+
+    grid-column:1/-1;
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.tablewrap{
+
+    overflow-x:auto;
+
+}
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:700px;
+
+}
+
+
+th,
+td{
+
+    padding:9px;
+
+    border-bottom:1px solid var(--line);
+
+    text-align:left;
+
+    font-size:14px;
+
+}
+
+
+.total{
+
+    font-weight:800;
+
+    color:var(--pink);
+
+}
+
+
+/* =====================================================
+   NOTICE
+===================================================== */
+
+.note{
+
+    font-size:12px;
+
+    color:#8b777c;
+
+    line-height:1.6;
+
+}
+
+
+/* =====================================================
+   QR
+===================================================== */
+
+#qr{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin:15px;
+
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#8b777c;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:800px){
+
+    .stats{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+
+    .menuadmin,
+    .formgrid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .wrap{
+
+        padding:10px;
+
+    }
+
+
+    .top{
+
+        padding:12px;
+
+    }
+
+
+    .top h1{
+
+        font-size:16px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================================
+     LOGIN
+================================================= -->
+
+<div
+    id="login"
+    class="login"
+>
+
+    <h2>
+        🔒 หลังร้าน
+    </h2>
+
+
+    <p>
+        สำหรับเจ้าของร้านเท่านั้น
+    </p>
+
+
+    <input
+        id="pass"
+        type="password"
+        placeholder="รหัสเจ้าของร้าน"
+        onkeydown="if(event.key==='Enter') login()"
+    >
+
+
+    <button
+        class="btn pink"
+        onclick="login()"
+    >
+
+        เข้าสู่หลังร้าน
+
+    </button>
+
+
+    <p class="note">
+
+        รหัสเริ่มต้น:
+        <b>1234</b>
+
+    </p>
+
+</div>
+
+
+
+<!-- =================================================
+     ADMIN
+================================================= -->
+
+<div
+    id="admin"
+    style="display:none"
+>
+
+
+<header class="top">
+
+    <h1>
+        👨‍🍳 หลังร้าน — สามสหายอิ่มอร่อย
+    </h1>
+
+
+    <button
+        class="back"
+        onclick="location.href='index.html'"
+    >
+
+        ดูหน้าลูกค้า
+
+    </button>
+
+</header>
+
+
+
+<main class="wrap">
+
+
+<!-- =================================================
+     STATISTICS
+================================================= -->
+
+<section class="stats">
+
+
+    <div class="stat">
+
+        <small>
+            ยอดขายทั้งหมด
+        </small>
+
+        <b id="sales">
+            ฿0
+        </b>
+
+    </div>
+
+
+    <div class="stat">
+
+        <small>
+            ออเดอร์ทั้งหมด
+        </small>
+
+        <b id="ordersCount">
+            0
+        </b>
+
+    </div>
+
+
+    <div class="stat">
+
+        <small>
+            รอรับออเดอร์
+        </small>
+
+        <b id="waiting">
+            0
+        </b>
+
+    </div>
+
+
+    <div class="stat">
+
+        <small>
+            ยอดโอนเงิน
+        </small>
+
+        <b id="transfers">
+            ฿0
+        </b>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =================================================
+     ORDER MANAGEMENT
+================================================= -->
+
+<section class="panel">
+
+    <h2>
+        🔔 จัดการออเดอร์
+    </h2>
+
+
+    <p class="note">
+
+        เจ้าของร้านสามารถรับออเดอร์
+        เริ่มทำอาหาร ทำเสร็จแล้ว
+        หรือยกเลิกออเดอร์ได้
+
+    </p>
+
+
+    <div id="orders">
+    </div>
+
+</section>
+
+
+
+<!-- =================================================
+     MENU MANAGEMENT
+================================================= -->
+
+<section class="panel">
+
+    <h2>
+        🍽️ จัดการเมนู
+    </h2>
+
+
+    <form
+        id="menuForm"
+        class="formgrid"
+        onsubmit="saveMenu(event)"
+    >
+
+
+        <input
+            type="hidden"
+            id="editId"
+        >
+
+
+        <input
+            id="name"
+            placeholder="ชื่อเมนู"
+            required
+        >
+
+
+        <input
+            id="price"
+            type="number"
+            min="0"
+            placeholder="ราคา (บาท)"
+            required
+        >
+
+
+        <select id="cat">
+
+            <option>
+                ข้าว
+            </option>
+
+            <option>
+                กับข้าว
+            </option>
+
+            <option>
+                เส้น
+            </option>
+
+            <option>
+                ยำ/ส้มตำ
+            </option>
+
+            <option>
+                ของทานเล่น
+            </option>
+
+            <option>
+                เครื่องดื่ม
+            </option>
+
+            <option>
+                อื่นๆ
+            </option>
+
+        </select>
+
+
+        <input
+            id="img"
+            placeholder="URL รูปอาหารจริง"
+            required
+        >
+
+
+        <textarea
+            id="desc"
+            class="full"
+            placeholder="รายละเอียดเมนู"
+        ></textarea>
+
+
+        <div class="full">
+
+            <button
+                class="btn pink"
+                id="saveBtn"
+            >
+
+                ➕ เพิ่มเมนู
+
+            </button>
+
+
+            <button
+                type="button"
+                class="btn gray"
+                onclick="resetForm()"
+            >
+
+                ล้างฟอร์ม
+
+            </button>
+
+        </div>
+
+
+    </form>
+
+
+    <div
+        id="menuAdmin"
+        class="menuadmin"
+        style="margin-top:15px"
+    >
+    </div>
+
+</section>
+
+
+
+<!-- =================================================
+     SALES
+================================================= -->
+
+<section class="panel">
+
+    <h2>
+        💰 สรุปยอดขาย
+    </h2>
+
+
+    <div class="tablewrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        เลขคิว
+                    </th>
+
+                    <th>
+                        โต๊ะ
+                    </th>
+
+                    <th>
+                        เวลา
+                    </th>
+
+                    <th>
+                        ชำระ
+                    </th>
+
+                    <th>
+                        ยอด
+                    </th>
+
+                    <th>
+                        สถานะ
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody
+                id="salesTable"
+            >
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================================
+     STORE SETTINGS
+================================================= -->
+
+<section class="panel">
+
+    <h2>
+        🏪 ตั้งค่าร้าน
+    </h2>
+
+
+    <div class="formgrid">
+
+
+        <input
+            id="storeName"
+            placeholder="ชื่อร้าน"
+        >
+
+
+        <input
+            id="bank"
+            placeholder="ธนาคาร"
+        >
+
+
+        <input
+            id="account"
+            placeholder="เลขบัญชี"
+        >
+
+
+        <input
+            id="accountName"
+            placeholder="ชื่อบัญชี"
+        >
+
+
+        <div class="full">
+
+            <button
+                class="btn pink"
+                onclick="saveSettings()"
+            >
+
+                💾 บันทึกข้อมูลร้าน
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================================
+     QR CODE
+================================================= -->
+
+<section class="panel">
+
+    <h2>
+        📱 QR Code สำหรับหน้าร้าน
+    </h2>
+
+
+    <p class="note">
+
+        ลูกค้าสแกน QR นี้
+        เพื่อเปิดหน้าเมนูและสั่งอาหาร
+
+    </p>
+
+
+    <div id="qr">
+    </div>
+
+
+    <button
+        class="btn pink"
+        onclick="printQR()"
+    >
+
+        🖨️ พิมพ์ QR Code
+
+    </button>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+
+<!-- =================================================
+     QR CODE LIBRARY
+================================================= -->
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+</script>
+
+
+
+<script>
+
+/* =====================================================
+   20 เมนูเริ่มต้น
+===================================================== */
+
+const DEFAULT_MENU = [
+
+{
+id:1,
+name:"ข้าวกะเพราหมู",
+price:50,
+cat:"ข้าว",
+desc:"หมูนุ่มผัดกะเพรา เสิร์ฟพร้อมข้าวสวยและไข่ดาว",
+img:"https://loremflickr.com/640/480/pad-kra-pao?lock=1"
+},
+
+{
+id:2,
+name:"ข้าวผัดหมู",
+price:50,
+cat:"ข้าว",
+desc:"ข้าวผัดหมูหอมกระทะ เสิร์ฟพร้อมแตงกวา",
+img:"https://loremflickr.com/640/480/fried-rice?lock=2"
+},
+
+{
+id:3,
+name:"ข้าวไข่เจียว",
+price:35,
+cat:"ข้าว",
+desc:"ไข่เจียวฟูนุ่ม รับประทานคู่ข้าวสวย",
+img:"https://loremflickr.com/640/480/omelette?lock=3"
+},
+
+{
+id:4,
+name:"ข้าวมันไก่",
+price:50,
+cat:"ข้าว",
+desc:"ไก่นุ่ม ข้าวมันหอม พร้อมน้ำจิ้ม",
+img:"https://loremflickr.com/640/480/chicken-rice?lock=4"
+},
+
+{
+id:5,
+name:"ผัดผักรวม",
+price:45,
+cat:"กับข้าว",
+desc:"ผักสดผัดกรอบ ปรุงรสกลมกล่อม",
+img:"https://loremflickr.com/640/480/stir-fried-vegetables?lock=5"
+},
+
+{
+id:6,
+name:"ต้มยำไก่",
+price:50,
+cat:"กับข้าว",
+desc:"ต้มยำรสจัดจ้าน หอมสมุนไพร",
+img:"https://loremflickr.com/640/480/tom-yum?lock=6"
+},
+
+{
+id:7,
+name:"แกงเขียวหวานไก่",
+price:55,
+cat:"กับข้าว",
+desc:"แกงกะทิหอมเครื่องแกง เสิร์ฟพร้อมข้าว",
+img:"https://loremflickr.com/640/480/green-curry?lock=7"
+},
+
+{
+id:8,
+name:"ผัดกะเพราไก่",
+price:50,
+cat:"กับข้าว",
+desc:"ไก่ผัดกะเพราเผ็ดหอม",
+img:"https://loremflickr.com/640/480/basil-chicken?lock=8"
+},
+
+{
+id:9,
+name:"ผัดไทย",
+price:55,
+cat:"เส้น",
+desc:"เส้นผัดไทยพร้อมถั่วงอกและเครื่องเคียง",
+img:"https://loremflickr.com/640/480/pad-thai?lock=9"
+},
+
+{
+id:10,
+name:"ราดหน้าหมู",
+price:50,
+cat:"เส้น",
+desc:"เส้นใหญ่ราดน้ำราดหน้าหมูนุ่ม",
+img:"https://loremflickr.com/640/480/rad-na?lock=10"
+},
+
+{
+id:11,
+name:"ผัดซีอิ๊วหมู",
+price:50,
+cat:"เส้น",
+desc:"เส้นใหญ่ผัดซีอิ๊วหอมกระทะ",
+img:"https://loremflickr.com/640/480/pad-see-ew?lock=11"
+},
+
+{
+id:12,
+name:"ก๋วยเตี๋ยวหมู",
+price:45,
+cat:"เส้น",
+desc:"ก๋วยเตี๋ยวน้ำหมูพร้อมเครื่องครบ",
+img:"https://loremflickr.com/640/480/noodles?lock=12"
+},
+
+{
+id:13,
+name:"ส้มตำไทย",
+price:45,
+cat:"ยำ/ส้มตำ",
+desc:"ส้มตำไทยรสเปรี้ยวหวานกำลังดี",
+img:"https://loremflickr.com/640/480/som-tam?lock=13"
+},
+
+{
+id:14,
+name:"ยำวุ้นเส้น",
+price:55,
+cat:"ยำ/ส้มตำ",
+desc:"ยำวุ้นเส้นรสจัดพร้อมหมูสับ",
+img:"https://loremflickr.com/640/480/glass-noodle-salad?lock=14"
+},
+
+{
+id:15,
+name:"ลาบหมู",
+price:55,
+cat:"ยำ/ส้มตำ",
+desc:"ลาบหมูหอมข้าวคั่วและสมุนไพร",
+img:"https://loremflickr.com/640/480/laab?lock=15"
+},
+
+{
+id:16,
+name:"ไก่ทอด",
+price:45,
+cat:"ของทานเล่น",
+desc:"ไก่ทอดกรอบนอกนุ่มใน",
+img:"https://loremflickr.com/640/480/fried-chicken?lock=16"
+},
+
+{
+id:17,
+name:"เฟรนช์ฟรายส์",
+price:40,
+cat:"ของทานเล่น",
+desc:"มันฝรั่งทอดกรอบ เสิร์ฟพร้อมซอส",
+img:"https://loremflickr.com/640/480/french-fries?lock=17"
+},
+
+{
+id:18,
+name:"ขนมปังกระเทียม",
+price:35,
+cat:"ของทานเล่น",
+desc:"ขนมปังกรอบหอมเนยกระเทียม",
+img:"https://loremflickr.com/640/480/garlic-bread?lock=18"
+},
+
+{
+id:19,
+name:"ชาเย็น",
+price:25,
+cat:"เครื่องดื่ม",
+desc:"ชาไทยเย็น หอมหวานมัน",
+img:"https://loremflickr.com/640/480/thai-tea?lock=19"
+},
+
+{
+id:20,
+name:"น้ำอัดลม",
+price:20,
+cat:"เครื่องดื่ม",
+desc:"เครื่องดื่มเย็นซ่า",
+img:"https://loremflickr.com/640/480/soft-drink?lock=20"
+}
+
+];
+
+
+/* =====================================================
+   DATA
+===================================================== */
+
+let menu =
+JSON.parse(
+    localStorage.getItem("menuData")
+) || DEFAULT_MENU;
+
+
+let settings =
+JSON.parse(
+    localStorage.getItem("storeSettings")
+) || {
+
+    name:"สามสหายอิ่มอร่อย",
+
+    bank:"ธนาคารตัวอย่าง",
+
+    account:"000-000-0000",
+
+    accountName:"สามสหายอิ่มอร่อย"
+
+};
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login(){
+
+    const password =
+        document
+        .getElementById("pass")
+        .value;
+
+
+    if(password === "1234"){
+
+        sessionStorage.setItem(
+            "ownerOK",
+            "1"
+        );
+
+        showAdmin();
+
+    }
+
+    else{
+
+        alert(
+            "รหัสผ่านไม่ถูกต้อง"
+        );
+
+    }
+
+}
+
+
+function showAdmin(){
+
+    document.getElementById(
+        "login"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "admin"
+    ).style.display = "block";
+
+
+    loadAll();
+
+}
+
+
+/* =====================================================
+   AUTO LOGIN
+===================================================== */
+
+if(
+    sessionStorage.getItem(
+        "ownerOK"
+    ) === "1"
+){
+
+    showAdmin();
+
+}
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+function money(number){
+
+    return "฿" +
+        Number(number)
+        .toLocaleString("th-TH");
+
+}
+
+
+/* =====================================================
+   ORDERS
+===================================================== */
+
+function getOrders(){
+
+    return JSON.parse(
+        localStorage.getItem(
+            "orders"
+        ) || "[]"
+    );
+
+}
+
+
+function saveOrders(orders){
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
+}
+
+
+/* =====================================================
+   LOAD ALL
+===================================================== */
+
+function loadAll(){
+
+    menu =
+        JSON.parse(
+            localStorage.getItem(
+                "menuData"
+            )
+        ) || DEFAULT_MENU;
+
+
+    settings =
+        JSON.parse(
+            localStorage.getItem(
+                "storeSettings"
+            )
+        ) || settings;
+
+
+    renderStats();
+
+    renderOrders();
+
+    renderMenu();
+
+    renderSales();
+
+    loadSettings();
+
+    makeQR();
+
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+function renderStats(){
+
+    const orders =
+        getOrders();
+
+
+    /*
+       ยกเลิกแล้วไม่นับเป็นยอดขาย
+    */
+
+    const validOrders =
+        orders.filter(
+            order =>
+                order.status !==
+                "ยกเลิก"
+        );
+
+
+    const total =
+        validOrders.reduce(
+            (sum,order) =>
+                sum + Number(order.total),
+            0
+        );
+
+
+    const transfer =
+        validOrders
+        .filter(
+            order =>
+                order.payment === "transfer"
+        )
+        .reduce(
+            (sum,order) =>
+                sum + Number(order.total),
+            0
+        );
+
+
+    const waiting =
+        orders.filter(
+            order =>
+                order.status ===
+                "รอรับออเดอร์"
+        ).length;
+
+
+    document.getElementById(
+        "sales"
+    ).textContent =
+        money(total);
+
+
+    document.getElementById(
+        "ordersCount"
+    ).textContent =
+        validOrders.length;
+
+
+    document.getElementById(
+        "waiting"
+    ).textContent =
+        waiting;
+
+
+    document.getElementById(
+        "transfers"
+    ).textContent =
+        money(transfer);
+
+}
+
+
+/* =====================================================
+   RENDER ORDERS
+===================================================== */
+
+function renderOrders(){
+
+    const orders =
+        getOrders()
+        .slice()
+        .reverse();
+
+
+    if(!orders.length){
+
+        document.getElementById(
+            "orders"
+        ).innerHTML = `
+
+            <div class="empty">
+
+                ยังไม่มีออเดอร์
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "orders"
+    ).innerHTML =
+
+    orders.map(order => {
+
+
+        let tagClass =
+            "wait";
+
+
+        if(
+            order.status ===
+            "กำลังทำ"
+        ){
+
+            tagClass =
+                "cook";
+
+        }
+
+
+        if(
+            order.status ===
+            "เสร็จแล้ว"
+        ){
+
+            tagClass =
+                "done";
+
+        }
+
+
+        if(
+            order.status ===
+            "ยกเลิก"
+        ){
+
+            tagClass =
+                "cancel";
+
+        }
+
+
+        return `
+
+        <div
+            class="
+                order
+                ${
+                    order.status ===
+                    "ยกเลิก"
+                    ? "cancelled"
+                    : ""
+                }
+            "
+        >
+
+
+            <div class="orderhead">
+
+
+                <div>
+
+                    <div class="orderqueue">
+
+                        <b>
+                            คิว ${order.queue}
+                        </b>
+
+                    </div>
+
+
+                    <b>
+                        โต๊ะ:
+                        ${order.table}
+                    </b>
+
+                </div>
+
+
+                <span
+                    class="
+                        tag
+                        ${tagClass}
+                    "
+                >
+
+                    ${order.status}
+
+                </span>
+
+
+            </div>
+
+
+            <hr>
+
+
+            <small>
+
+                เวลา:
+                ${order.time}
+
+                <br>
+
+                การชำระเงิน:
+
+                ${
+                    order.payment ===
+                    "cash"
+
+                    ? "💵 เงินสด"
+
+                    : "🏦 โอนเงิน"
+
+                }
+
+            </small>
+
+
+            <p>
+
+                <b>
+                    รายการอาหาร
+                </b>
+
+                <br>
+
+                ${order.items.map(
+                    item => `
+
+                        ${item.name}
+                        ×
+                        ${item.qty}
+
+                        —
+                        ${money(
+                            item.price *
+                            item.qty
+                        )}
+
+                        <br>
+
+                    `
+                ).join("")}
+
+            </p>
+
+
+            <div>
+
+                <b>
+                    ยอดรวม:
+                </b>
+
+                <span class="total">
+
+                    ${money(order.total)}
+
+                </span>
+
+            </div>
+
+
+            <p class="note">
+
+                หมายเหตุ:
+                ${order.note || "-"}
+
+            </p>
+
+
+            ${
+                order.cancelReason
+
+                ?
+
+                `
+
+                <div
+                    style="
+                    background:#ffecef;
+                    padding:10px;
+                    border-radius:10px;
+                    color:#a32639;
+                    font-size:13px;
+                    "
+                >
+
+                    <b>
+                        เหตุผลที่ยกเลิก:
+                    </b>
+
+                    ${order.cancelReason}
+
+                </div>
+
+                `
+
+                :
+
+                ""
+
+            }
+
+
+            <div
+                style="
+                margin-top:12px;
+                display:flex;
+                gap:7px;
+                flex-wrap:wrap;
+                "
+            >
+
+
+                <!-- รอรับออเดอร์ -->
+
+                ${
+                    order.status ===
+                    "รอรับออเดอร์"
+
+                    ?
+
+                    `
+
+                    <button
+                        class="btn yellow"
+                        onclick="
+                            changeStatus(
+                                ${order.id},
+                                'กำลังทำ'
+                            )
+                        "
+                    >
+
+                        ✅ รับออเดอร์
+
+                    </button>
+
+
+                    <button
+                        class="btn red"
+                        onclick="
+                            cancelOrder(
+                                ${order.id}
+                            )
+                        "
+                    >
+
+                        ❌ ยกเลิกออเดอร์
+
+                    </button>
+
+                    `
+
+                    :
+
+                    ""
+
+                }
+
+
+
+                <!-- กำลังทำ -->
+
+                ${
+                    order.status ===
+                    "กำลังทำ"
+
+                    ?
+
+                    `
+
+                    <button
+                        class="btn green"
+                        onclick="
+                            changeStatus(
+                                ${order.id},
+                                'เสร็จแล้ว'
+                            )
+                        "
+                    >
+
+                        🍳 ทำเสร็จแล้ว
+
+                    </button>
+
+
+                    <button
+                        class="btn red"
+                        onclick="
+                            cancelOrder(
+                                ${order.id}
+                            )
+                        "
+                    >
+
+                        ❌ ยกเลิกออเดอร์
+
+                    </button>
+
+                    `
+
+                    :
+
+                    ""
+
+                }
+
+
+
+                <!-- เสร็จแล้ว -->
+
+                ${
+                    order.status ===
+                    "เสร็จแล้ว"
+
+                    ?
+
+                    `
+
+                    <button
+                        class="btn blue"
+                        onclick="
+                            changeStatus(
+                                ${order.id},
+                                'ปิดงาน'
+                            )
+                        "
+                    >
+
+                        📦 ปิดงาน
+
+                    </button>
+
+                    `
+
+                    :
+
+                    ""
+
+                }
+
+
+
+                <!-- ปิดงาน -->
+
+                ${
+                    order.status ===
+                    "ปิดงาน"
+
+                    ?
+
+                    `
+
+                    <span
+                        class="tag done"
+                    >
+
+                        ✓ ปิดงานแล้ว
+
+                    </span>
+
+                    `
+
+                    :
+
+                    ""
+
+                }
+
+
+
+                <!-- ยกเลิก -->
+
+                ${
+                    order.status ===
+                    "ยกเลิก"
+
+                    ?
+
+                    `
+
+                    <span
+                        class="tag cancel"
+                    >
+
+                        ✕ ออเดอร์ถูกยกเลิก
+
+                    </span>
+
+                    `
+
+                    :
+
+                    ""
+
+                }
+
+
+            </div>
+
+
+        </div>
+
+        `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   CHANGE STATUS
+===================================================== */
+
+function changeStatus(id,status){
+
+    const orders =
+        getOrders();
+
+
+    const order =
+        orders.find(
+            item =>
+                item.id === id
+        );
+
+
+    if(!order){
+
+        return;
+
+    }
+
+
+    /*
+       ถ้าออเดอร์ถูกยกเลิก
+       จะไม่สามารถเปลี่ยนสถานะได้
+    */
+
+    if(
+        order.status ===
+        "ยกเลิก"
+    ){
+
+        alert(
+            "ออเดอร์นี้ถูกยกเลิกแล้ว"
+        );
+
+        return;
+
+    }
+
+
+    order.status =
+        status;
+
+
+    saveOrders(orders);
+
+
+    loadAll();
+
+}
+
+
+/* =====================================================
+   CANCEL ORDER
+===================================================== */
+
+function cancelOrder(id){
+
+    const orders =
+        getOrders();
+
+
+    const order =
+        orders.find(
+            item =>
+                item.id === id
+        );
+
+
+    if(!order){
+
+        alert(
+            "ไม่พบออเดอร์"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        order.status ===
+        "ยกเลิก"
+    ){
+
+        alert(
+            "ออเดอร์นี้ถูกยกเลิกไปแล้ว"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       ถามยืนยันก่อนยกเลิก
+    */
+
+    const confirmCancel =
+        confirm(
+
+            "ต้องการยกเลิกออเดอร์ " +
+            order.queue +
+            " ใช่หรือไม่?"
+
+        );
+
+
+    if(!confirmCancel){
+
+        return;
+
+    }
+
+
+    /*
+       รับเหตุผล
+    */
+
+    let reason =
+        prompt(
+            "กรุณาระบุเหตุผลที่ยกเลิกออเดอร์",
+            "ลูกค้ายกเลิก"
+        );
+
+
+    if(
+        reason === null
+    ){
+
+        return;
+
+    }
+
+
+    reason =
+        reason.trim();
+
+
+    if(!reason){
+
+        reason =
+            "ไม่ได้ระบุเหตุผล";
+
+    }
+
+
+    /*
+       เปลี่ยนสถานะ
+    */
+
+    order.status =
+        "ยกเลิก";
+
+
+    order.cancelReason =
+        reason;
+
+
+    order.cancelTime =
+        new Date()
+        .toLocaleString("th-TH");
+
+
+    saveOrders(orders);
+
+
+    loadAll();
+
+
+    alert(
+        "ยกเลิกออเดอร์ " +
+        order.queue +
+        " เรียบร้อยแล้ว"
+    );
+
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function renderMenu(){
+
+    document.getElementById(
+        "menuAdmin"
+    ).innerHTML =
+
+    menu.map(item => `
+
+        <div class="mcard">
+
+
+            <img
+                src="${item.img}"
+                alt="${item.name}"
+            >
+
+
+            <div>
+
+                <h3>
+                    ${item.name}
+                </h3>
+
+
+                <b class="total">
+
+                    ${money(item.price)}
+
+                </b>
+
+
+                <p class="note">
+
+                    หมวด:
+                    ${item.cat}
+
+                    <br>
+
+                    ${item.desc}
+
+                </p>
+
+
+                <div class="actions">
+
+
+                    <button
+                        class="btn yellow"
+                        onclick="
+                            editMenu(
+                                ${item.id}
+                            )
+                        "
+                    >
+
+                        ✏️ แก้ไข/ตั้งราคา
+
+                    </button>
+
+
+                    <button
+                        class="btn red"
+                        onclick="
+                            deleteMenu(
+                                ${item.id}
+                            )
+                        "
+                    >
+
+                        🗑️ ลบ
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   SAVE MENU
+===================================================== */
+
+function saveMenu(event){
+
+    event.preventDefault();
+
+
+    const id =
+        Number(
+            document
+            .getElementById("editId")
+            .value
+        );
+
+
+    const data = {
+
+        id:
+            id ||
+            Date.now(),
+
+        name:
+            document
+            .getElementById("name")
+            .value
+            .trim(),
+
+        price:
+            Number(
+                document
+                .getElementById("price")
+                .value
+            ),
+
+        cat:
+            document
+            .getElementById("cat")
+            .value,
+
+        img:
+            document
+            .getElementById("img")
+            .value
+            .trim(),
+
+        desc:
+            document
+            .getElementById("desc")
+            .value
+            .trim()
+
+    };
+
+
+    if(id){
+
+        menu =
+            menu.map(
+                item =>
+                    item.id === id
+                    ? data
+                    : item
+            );
+
+    }
+
+    else{
+
+        menu.push(data);
+
+    }
+
+
+    localStorage.setItem(
+        "menuData",
+        JSON.stringify(menu)
+    );
+
+
+    resetForm();
+
+    loadAll();
+
+
+    alert(
+        id
+        ? "แก้ไขเมนูเรียบร้อยแล้ว"
+        : "เพิ่มเมนูเรียบร้อยแล้ว"
+    );
+
+}
+
+
+/* =====================================================
+   EDIT MENU
+===================================================== */
+
+function editMenu(id){
+
+    const item =
+        menu.find(
+            x => x.id === id
+        );
+
+
+    if(!item){
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "editId"
+    ).value =
+        item.id;
+
+
+    document.getElementById(
+        "name"
+    ).value =
+        item.name;
+
+
+    document.getElementById(
+        "price"
+    ).value =
+        item.price;
+
+
+    document.getElementById(
+        "cat"
+    ).value =
+        item.cat;
+
+
+    document.getElementById(
+        "img"
+    ).value =
+        item.img;
+
+
+    document.getElementById(
+        "desc"
+    ).value =
+        item.desc;
+
+
+    document.getElementById(
+        "saveBtn"
+    ).textContent =
+        "💾 บันทึกการแก้ไข";
+
+
+    window.scrollTo({
+
+        top:
+            document
+            .getElementById(
+                "menuForm"
+            )
+            .offsetTop - 70,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* =====================================================
+   RESET FORM
+===================================================== */
+
+function resetForm(){
+
+    document
+    .getElementById(
+        "menuForm"
+    )
+    .reset();
+
+
+    document.getElementById(
+        "editId"
+    ).value = "";
+
+
+    document.getElementById(
+        "saveBtn"
+    ).textContent =
+        "➕ เพิ่มเมนู";
+
+}
+
+
+/* =====================================================
+   DELETE MENU
+===================================================== */
+
+function deleteMenu(id){
+
+    const item =
+        menu.find(
+            x => x.id === id
+        );
+
+
+    if(!item){
+
+        return;
+
+    }
+
+
+    const confirmDelete =
+        confirm(
+
+            "ต้องการลบเมนู " +
+            item.name +
+            " ใช่หรือไม่?"
+
+        );
+
+
+    if(!confirmDelete){
+
+        return;
+
+    }
+
+
+    menu =
+        menu.filter(
+            item =>
+                item.id !== id
+        );
+
+
+    localStorage.setItem(
+        "menuData",
+        JSON.stringify(menu)
+    );
+
+
+    loadAll();
+
+
+    alert(
+        "ลบเมนูเรียบร้อยแล้ว"
+    );
+
+}
+
+
+/* =====================================================
+   SALES TABLE
+===================================================== */
+
+function renderSales(){
+
+    const orders =
+        getOrders()
+        .slice()
+        .reverse();
+
+
+    if(!orders.length){
+
+        document.getElementById(
+            "salesTable"
+        ).innerHTML = `
+
+            <tr>
+
+                <td colspan="6">
+
+                    ยังไม่มีข้อมูล
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "salesTable"
+    ).innerHTML =
+
+    orders.map(order => `
+
+        <tr>
+
+            <td>
+                ${order.queue}
+            </td>
+
+            <td>
+                ${order.table}
+            </td>
+
+            <td>
+                ${order.time}
+            </td>
+
+            <td>
+
+                ${
+                    order.payment ===
+                    "cash"
+
+                    ?
+
+                    "💵 เงินสด"
+
+                    :
+
+                    "🏦 โอนเงิน"
+
+                }
+
+            </td>
+
+            <td
+                class="
+                    ${
+                        order.status ===
+                        "ยกเลิก"
+                        ? ""
+                        : "total"
+                    }
+                "
+            >
+
+                ${
+                    order.status ===
+                    "ยกเลิก"
+
+                    ?
+
+                    "฿0"
+
+                    :
+
+                    money(order.total)
+
+                }
+
+            </td>
+
+            <td>
+
+                ${
+                    order.status ===
+                    "ยกเลิก"
+
+                    ?
+
+                    '<span class="tag cancel">ยกเลิก</span>'
+
+                    :
+
+                    order.status
+
+                }
+
+            </td>
+
+        </tr>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   STORE SETTINGS
+===================================================== */
+
+function saveSettings(){
+
+    settings = {
+
+        name:
+            document
+            .getElementById(
+                "storeName"
+            )
+            .value
+            .trim(),
+
+        bank:
+            document
+            .getElementById(
+                "bank"
+            )
+            .value
+            .trim(),
+
+        account:
+            document
+            .getElementById(
+                "account"
+            )
+            .value
+            .trim(),
+
+        accountName:
+            document
+            .getElementById(
+                "accountName"
+            )
+            .value
+            .trim()
+
+    };
+
+
+    localStorage.setItem(
+        "storeSettings",
+        JSON.stringify(settings)
+    );
+
+
+    alert(
+        "บันทึกข้อมูลร้านแล้ว"
+    );
+
+
+    loadAll();
+
+}
+
+
+function loadSettings(){
+
+    document.getElementById(
+        "storeName"
+    ).value =
+        settings.name;
+
+
+    document.getElementById(
+        "bank"
+    ).value =
+        settings.bank;
+
+
+    document.getElementById(
+        "account"
+    ).value =
+        settings.account;
+
+
+    document.getElementById(
+        "accountName"
+    ).value =
+        settings.accountName;
+
+}
+
+
+/* =====================================================
+   CREATE QR
+===================================================== */
+
+function makeQR(){
+
+    const box =
+        document.getElementById(
+            "qr"
+        );
+
+
+    box.innerHTML = "";
+
+
+    const menuURL =
+        new URL(
+            "index.html",
+            location.href
+        ).href;
+
+
+    new QRCode(
+        box,
+        {
+
+            text:
+                menuURL,
+
+            width:
+                220,
+
+            height:
+                220,
+
+            colorDark:
+                "#222",
+
+            colorLight:
+                "#fff"
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PRINT QR
+===================================================== */
+
+function printQR(){
+
+    const menuURL =
+        new URL(
+            "index.html",
+            location.href
+        ).href;
+
+
+    const printWindow =
+        window.open(
+            "",
+            "_blank"
+        );
+
+
+    if(!printWindow){
+
+        alert(
+            "เบราว์เซอร์บล็อกหน้าต่างพิมพ์ กรุณาอนุญาต Pop-up"
+        );
+
+        return;
+
+    }
+
+
+    printWindow.document.write(`
+
+        <!DOCTYPE html>
+
+        <html>
+
+        <head>
+
+            <title>
+                QR Code ร้านอาหาร
+            </title>
+
+        </head>
+
+
+        <body
+            style="
+                text-align:center;
+                font-family:Arial;
+                padding-top:40px;
+            "
+        >
+
+            <h1>
+                ${settings.name}
+            </h1>
+
+
+            <div id="qrcode">
+            </div>
+
+
+            <h2>
+                📱 สแกนเพื่อสั่งอาหาร
+            </h2>
+
+
+            <p>
+                ${menuURL}
+            </p>
+
+
+            <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+            <\/script>
+
+
+            <script>
+
+                new QRCode(
+
+                    document.getElementById(
+                        "qrcode"
+                    ),
+
+                    {
+
+                        text:
+                        ${JSON.stringify(menuURL)},
+
+                        width:
+                        300,
+
+                        height:
+                        300
+
+                    }
+
+                );
+
+            <\/script>
+
+        </body>
+
+        </html>
+
+    `);
+
+
+    printWindow.document.close();
+
+
+    setTimeout(
+
+        function(){
+
+            printWindow.print();
+
+        },
+
+        700
+
+    );
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+</script>
+
+</body>
+
+</html>
+```
