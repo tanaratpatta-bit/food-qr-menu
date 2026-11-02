@@ -1,0 +1,3117 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ร้านอาหาร QR Menu</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Thai",sans-serif;
+    background:#fff5f8;
+    color:#333;
+}
+
+header{
+    background:linear-gradient(135deg,#ff4f81,#ff7aa2);
+    color:white;
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:20;
+    box-shadow:0 3px 12px #0002;
+}
+
+header h1{
+    margin:0;
+    font-size:24px;
+}
+
+.header-buttons{
+    display:flex;
+    gap:8px;
+}
+
+button{
+    border:0;
+    border-radius:12px;
+    padding:10px 14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.owner-btn,
+.cart-btn{
+    background:#fff;
+    color:#d93668;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.banner{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 3px 15px #0001;
+    margin-bottom:20px;
+}
+
+.banner h2{
+    color:#e83e70;
+    margin:0 0 8px;
+}
+
+.categories{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.categories button{
+    background:white;
+    color:#e83e70;
+    border:2px solid #ffb0c6;
+}
+
+.categories button.active,
+.categories button:hover{
+    background:#ff5b88;
+    color:white;
+}
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:16px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 3px 12px #0001;
+}
+
+.food-img{
+    height:170px;
+    background:#ffe2eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.food-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:14px;
+}
+
+.card h3{
+    margin:0 0 6px;
+}
+
+.price{
+    font-size:19px;
+    font-weight:bold;
+    color:#e83e70;
+    margin-bottom:10px;
+}
+
+.add-btn{
+    width:100%;
+    background:#ff4f81;
+    color:white;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:100;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal-box{
+    background:white;
+    width:min(600px,100%);
+    max-height:90vh;
+    overflow:auto;
+    border-radius:20px;
+    padding:22px;
+}
+
+.modal-box h2{
+    margin-top:0;
+    color:#e83e70;
+}
+
+.form-group{
+    margin-bottom:12px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:11px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:80px;
+    resize:vertical;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #eee;
+    padding:12px 0;
+    gap:10px;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.qty button{
+    background:#ffe1ea;
+    color:#d93668;
+    padding:5px 10px;
+}
+
+.total{
+    font-size:20px;
+    font-weight:bold;
+    text-align:right;
+    margin:15px 0;
+    color:#d93668;
+}
+
+.primary{
+    background:#ff4f81;
+    color:#fff;
+}
+
+.secondary{
+    background:#eee;
+    color:#444;
+}
+
+.success{
+    text-align:center;
+    padding:20px;
+}
+
+.queue{
+    font-size:44px;
+    font-weight:bold;
+    color:#e83e70;
+}
+
+.owner-page{
+    display:none;
+}
+
+.owner-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.order-card,
+.manager-card{
+    background:white;
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:14px;
+    box-shadow:0 3px 12px #0001;
+}
+
+.order-head{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.status{
+    display:inline-block;
+    background:#ffe1ea;
+    color:#d93668;
+    border-radius:20px;
+    padding:5px 10px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.order-buttons{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+
+.order-buttons button{
+    padding:8px 10px;
+}
+
+.accept{
+    background:#ffd166;
+}
+
+.done{
+    background:#8ee3a7;
+}
+
+.danger{
+    background:#ff8b8b;
+    color:#700;
+}
+
+.menu-manager{
+    margin-top:24px;
+}
+
+.manager-form{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 2fr auto;
+    gap:8px;
+    align-items:end;
+}
+
+.manager-list{
+    margin-top:14px;
+}
+
+.manager-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    border-bottom:1px solid #eee;
+    padding:10px 0;
+    flex-wrap:wrap;
+}
+
+.manager-info{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.manager-emoji{
+    font-size:32px;
+}
+
+.manager-actions{
+    display:flex;
+    gap:6px;
+}
+
+.small{
+    font-size:13px;
+    color:#777;
+}
+
+.empty{
+    text-align:center;
+    padding:30px;
+    color:#777;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#888;
+}
+
+.finance-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.finance-box{
+    background:white;
+    border-radius:18px;
+    padding:18px;
+    text-align:center;
+    box-shadow:0 3px 12px #0001;
+}
+
+.finance-title{
+    font-size:14px;
+    color:#777;
+}
+
+.finance-number{
+    font-size:27px;
+    font-weight:bold;
+    color:#e83e70;
+    margin-top:7px;
+}
+
+.bank-box{
+    background:#fff0f5;
+    border:1px solid #ffb0c6;
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:12px;
+}
+
+@media(max-width:700px){
+
+    header h1{
+        font-size:18px;
+    }
+
+    .manager-form{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .manager-form button{
+        grid-column:1/-1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🍽️ ร้านอาหารของเรา</h1>
+
+<div class="header-buttons">
+
+<button class="owner-btn"
+onclick="openOwnerLogin()">
+👨‍🍳 ร้าน
+</button>
+
+<button class="cart-btn"
+onclick="openCart()">
+🛒 ตะกร้า (<span id="cartCount">0</span>)
+</button>
+
+</div>
+
+</header>
+
+
+<!-- =========================
+     หน้าลูกค้า
+========================= -->
+
+<div id="customerPage">
+
+<main class="container">
+
+<section class="banner">
+
+<h2>เมนูอาหาร</h2>
+
+<p>
+สแกน QR Code แล้วสั่งอาหารได้เลย
+</p>
+
+</section>
+
+
+<div
+class="categories"
+id="categories">
+</div>
+
+
+<section
+class="menu"
+id="menu">
+</section>
+
+</main>
+
+
+<footer>
+ระบบสั่งอาหารผ่าน QR Code
+</footer>
+
+</div>
+
+
+
+<!-- =========================
+     หลังร้าน
+========================= -->
+
+<div id="ownerPage" class="owner-page">
+
+<main class="container">
+
+<div class="owner-top">
+
+<div>
+
+<h2 style="color:#e83e70;margin-bottom:4px">
+👨‍🍳 หลังร้าน
+</h2>
+
+<div class="small">
+จัดการออเดอร์ เมนู และการเงิน
+</div>
+
+</div>
+
+<button
+class="secondary"
+onclick="showCustomer()">
+
+← หน้าเมนู
+
+</button>
+
+</div>
+
+
+<!-- =========================
+     ระบบการเงิน
+========================= -->
+
+<section>
+
+<h3>
+💰 สรุปการเงินวันนี้
+</h3>
+
+
+<div class="finance-grid">
+
+
+<div class="finance-box">
+
+<div class="finance-title">
+💵 ยอดขายวันนี้
+</div>
+
+<div
+id="todaySales"
+class="finance-number">
+
+0 บาท
+
+</div>
+
+</div>
+
+
+<div class="finance-box">
+
+<div class="finance-title">
+📦 จำนวนออเดอร์วันนี้
+</div>
+
+<div
+id="todayOrders"
+class="finance-number">
+
+0
+
+</div>
+
+</div>
+
+
+<div class="finance-box">
+
+<div class="finance-title">
+💵 เงินสดวันนี้
+</div>
+
+<div
+id="todayCash"
+class="finance-number">
+
+0 บาท
+
+</div>
+
+</div>
+
+
+<div class="finance-box">
+
+<div class="finance-title">
+🏦 เงินโอนวันนี้
+</div>
+
+<div
+id="todayTransfer"
+class="finance-number">
+
+0 บาท
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="manager-card">
+
+<b>
+📊 ยอดขายรวมทั้งร้าน
+</b>
+
+<span
+id="allTimeSales"
+style="float:right;font-weight:bold;color:#e83e70">
+
+0 บาท
+
+</span>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     ออเดอร์
+========================= -->
+
+<section>
+
+<h3>
+📋 ออเดอร์จากลูกค้า
+</h3>
+
+<div id="orders">
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     บัญชีธนาคาร
+========================= -->
+
+<section class="menu-manager">
+
+<h3>
+🏦 บัญชีสำหรับรับโอน
+</h3>
+
+
+<div class="manager-card">
+
+<div
+class="manager-form"
+style="grid-template-columns:1fr 1fr 2fr auto">
+
+
+<div class="form-group">
+
+<label>
+ชื่อธนาคาร
+</label>
+
+<input
+id="bankName"
+placeholder="เช่น ธนาคารกสิกรไทย">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+ชื่อบัญชี
+</label>
+
+<input
+id="accountName"
+placeholder="ชื่อเจ้าของบัญชี">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+เลขบัญชี
+</label>
+
+<input
+id="accountNumber"
+placeholder="เลขบัญชีสำหรับรับโอน">
+
+</div>
+
+
+<button
+class="primary"
+onclick="saveBankSettings()">
+
+💾 บันทึกบัญชี
+
+</button>
+
+</div>
+
+
+<p class="small">
+
+ข้อมูลนี้จะแสดงให้ลูกค้า
+เมื่อเลือก "โอนเงิน"
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     จัดการเมนู
+========================= -->
+
+<section class="menu-manager">
+
+<h3>
+🍴 จัดการเมนู
+</h3>
+
+
+<div class="manager-card">
+
+
+<div class="manager-form">
+
+
+<div class="form-group">
+
+<label>
+ชื่อเมนู
+</label>
+
+<input
+id="foodName"
+placeholder="เช่น ข้าวกะเพราหมู">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+ราคา
+</label>
+
+<input
+id="foodPrice"
+type="number"
+min="0"
+placeholder="50">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+หมวดหมู่
+</label>
+
+<select id="foodCategory">
+
+<option>
+ข้าว
+</option>
+
+<option>
+กับข้าว
+</option>
+
+<option>
+เครื่องดื่ม
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+ลิงก์รูปอาหาร
+</label>
+
+<input
+id="foodImage"
+type="url"
+placeholder="https://example.com/food.jpg">
+
+</div>
+
+
+<button
+class="primary"
+id="saveFoodBtn"
+onclick="saveFood()">
+
+➕ เพิ่มเมนู
+
+</button>
+
+
+</div>
+
+
+<div class="small">
+
+ใส่ลิงก์รูปภาพอาหาร เช่น
+https://example.com/food.jpg
+
+</div>
+
+
+<div
+class="manager-list"
+id="menuManager">
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<div
+class="modal"
+id="loginModal">
+
+<div
+class="modal-box"
+style="max-width:400px">
+
+<h2>
+🔐 เข้าสู่หลังร้าน
+</h2>
+
+<p>
+กรุณาใส่รหัสผ่านสำหรับเจ้าของร้าน
+</p>
+
+
+<div class="form-group">
+
+<label>
+รหัสผ่าน
+</label>
+
+<input
+id="ownerPassword"
+type="password"
+placeholder="ใส่รหัสผ่าน"
+onkeydown="if(event.key==='Enter')loginOwner()">
+
+</div>
+
+
+<div style="display:flex;gap:8px">
+
+<button
+class="primary"
+style="flex:1"
+onclick="loginOwner()">
+
+เข้าสู่หลังร้าน
+
+</button>
+
+
+<button
+class="secondary"
+onclick="closeOwnerLogin()">
+
+ยกเลิก
+
+</button>
+
+</div>
+
+
+<p
+id="loginError"
+style="color:#e33;text-align:center;display:none">
+
+❌ รหัสผ่านไม่ถูกต้อง
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     CART
+========================= -->
+
+<div
+class="modal"
+id="cartModal">
+
+<div class="modal-box">
+
+<h2>
+🛒 ตะกร้าอาหาร
+</h2>
+
+
+<div id="cartItems">
+</div>
+
+
+<div class="total">
+
+รวม
+<span id="cartTotal">
+0
+</span>
+บาท
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+🍽️ รูปแบบการรับอาหาร
+</label>
+
+<select id="orderType">
+
+<option value="กินที่ร้าน">
+กินที่ร้าน
+</option>
+
+<option value="กลับบ้าน">
+กลับบ้าน
+</option>
+
+</select>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+🪑 โต๊ะ
+</label>
+
+<input
+id="tableNumber"
+placeholder="เช่น โต๊ะ 5">
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+💳 การชำระเงิน
+</label>
+
+<select
+id="payment"
+onchange="toggleBankInfo()">
+
+<option value="เงินสด">
+เงินสด
+</option>
+
+<option value="โอนเงิน">
+โอนเงิน
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- ข้อมูลธนาคาร -->
+
+<div
+id="bankInfo"
+class="bank-box"
+style="display:none">
+
+<b>
+🏦 บัญชีสำหรับโอนเงิน
+</b>
+
+
+<div
+id="bankDetails"
+style="margin-top:8px">
+
+</div>
+
+
+<button
+type="button"
+class="primary"
+style="margin-top:10px"
+onclick="copyBankAccount()">
+
+📋 คัดลอกเลขบัญชี
+
+</button>
+
+
+<div
+class="small"
+style="margin-top:8px">
+
+โอนเงินผ่านแอปธนาคารของลูกค้าเอง
+แล้วกดยืนยันออเดอร์
+
+</div>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+📝 หมายเหตุ
+</label>
+
+<textarea
+id="note"
+placeholder="เช่น ไม่ใส่ผัก">
+</textarea>
+
+</div>
+
+
+
+<div style="display:flex;gap:8px">
+
+<button
+class="primary"
+style="flex:1"
+onclick="confirmOrder()">
+
+ยืนยันออเดอร์
+
+</button>
+
+
+<button
+class="secondary"
+onclick="closeCart()">
+
+ปิด
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     SUCCESS
+========================= -->
+
+<div
+class="modal"
+id="successModal">
+
+<div class="modal-box success">
+
+<h2>
+✅ สั่งอาหารสำเร็จ
+</h2>
+
+<p>
+หมายเลขคิวของคุณคือ
+</p>
+
+
+<div
+class="queue"
+id="queueNumber">
+
+000
+
+</div>
+
+
+<p id="successPaymentText">
+
+กรุณารอเรียกคิวจากร้าน
+
+</p>
+
+
+<button
+class="primary"
+onclick="closeSuccess()">
+
+กลับหน้าเมนู
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+/* =========================
+   เมนูเริ่มต้น
+========================= */
+
+const defaultFoods = [
+
+{
+id:1,
+name:"ข้าวกะเพราหมู",
+price:50,
+category:"ข้าว",
+image:""
+},
+
+{
+id:2,
+name:"ข้าวกะเพราไก่",
+price:50,
+category:"ข้าว",
+image:""
+},
+
+{
+id:3,
+name:"ข้าวกะเพราหมูกรอบ",
+price:60,
+category:"ข้าว",
+image:""
+},
+
+{
+id:4,
+name:"ข้าวผัดหมู",
+price:50,
+category:"ข้าว",
+image:""
+},
+
+{
+id:5,
+name:"ข้าวผัดไก่",
+price:50,
+category:"ข้าว",
+image:""
+},
+
+{
+id:6,
+name:"ข้าวผัดกุ้ง",
+price:65,
+category:"ข้าว",
+image:""
+},
+
+{
+id:7,
+name:"ข้าวไข่เจียวหมูสับ",
+price:45,
+category:"ข้าว",
+image:""
+},
+
+{
+id:8,
+name:"ข้าวหมูกระเทียม",
+price:50,
+category:"ข้าว",
+image:""
+},
+
+{
+id:9,
+name:"ผัดผักรวม",
+price:45,
+category:"กับข้าว",
+image:""
+},
+
+{
+id:10,
+name:"ต้มยำไก่",
+price:50,
+category:"กับข้าว",
+image:""
+},
+
+{
+id:11,
+name:"ต้มจืดเต้าหู้หมูสับ",
+price:50,
+category:"กับข้าว",
+image:""
+},
+
+{
+id:12,
+name:"ผัดกะหล่ำปลีหมู",
+price:45,
+category:"กับข้าว",
+image:""
+},
+
+{
+id:13,
+name:"ไก่ทอดกระเทียม",
+price:55,
+category:"กับข้าว",
+image:""
+},
+
+{
+id:14,
+name:"ไข่เจียวหมูสับ",
+price:40,
+category:"กับข้าว",
+image:""
+},
+
+{
+id:15,
+name:"ชาเย็น",
+price:25,
+category:"เครื่องดื่ม",
+image:""
+},
+
+{
+id:16,
+name:"ชาเขียว",
+price:25,
+category:"เครื่องดื่ม",
+image:""
+},
+
+{
+id:17,
+name:"โกโก้เย็น",
+price:30,
+category:"เครื่องดื่ม",
+image:""
+},
+
+{
+id:18,
+name:"นมชมพู",
+price:30,
+category:"เครื่องดื่ม",
+image:""
+},
+
+{
+id:19,
+name:"น้ำอัดลม",
+price:20,
+category:"เครื่องดื่ม",
+image:""
+},
+
+{
+id:20,
+name:"น้ำเปล่า",
+price:10,
+category:"เครื่องดื่ม",
+image:""
+}
+
+];
+
+
+let foods =
+JSON.parse(
+localStorage.getItem("foods")
+)
+||
+defaultFoods;
+
+
+let cart=[];
+
+let editFoodId=null;
+
+
+
+/* =========================
+   บันทึกเมนู
+========================= */
+
+function saveFoods(){
+
+localStorage.setItem(
+"foods",
+JSON.stringify(foods)
+);
+
+}
+
+
+
+/* =========================
+   แสดงอาหาร
+========================= */
+
+function showFoods(list){
+
+const menu=
+document.getElementById("menu");
+
+
+if(!list.length){
+
+menu.innerHTML=
+'<div class="empty">ยังไม่มีเมนูในหมวดนี้</div>';
+
+return;
+
+}
+
+
+menu.innerHTML=
+
+list.map(f=>`
+
+<div class="card">
+
+<div class="food-img">
+
+${
+f.image
+
+?
+
+`<img
+src="${escapeAttr(f.image)}"
+alt="${escapeAttr(f.name)}"
+onerror="this.style.display='none';this.parentElement.textContent='🍽️'"
+>`
+
+:
+
+"🍽️"
+
+}
+
+</div>
+
+
+<div class="card-body">
+
+<h3>
+${escapeHtml(f.name)}
+</h3>
+
+
+<div class="price">
+
+${Number(f.price).toLocaleString()}
+บาท
+
+</div>
+
+
+<button
+class="add-btn"
+onclick="addFood(${f.id})">
+
+➕ เพิ่มลงตะกร้า
+
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+
+/* =========================
+   หมวดหมู่
+========================= */
+
+function renderCategories(){
+
+const categories=
+[...new Set(
+foods.map(f=>f.category)
+)];
+
+
+const box=
+document.getElementById("categories");
+
+
+box.innerHTML=
+
+`<button
+class="active"
+onclick="filterFood('ทั้งหมด',this)">
+
+ทั้งหมด
+
+</button>`
+
++
+
+categories.map(c=>`
+
+<button
+onclick="filterFood('${escapeAttr(c)}',this)">
+
+${escapeHtml(c)}
+
+</button>
+
+`).join("");
+
+}
+
+
+
+function filterFood(category,button){
+
+document
+.querySelectorAll(".categories button")
+.forEach(b=>
+b.classList.remove("active")
+);
+
+
+button.classList.add("active");
+
+
+showFoods(
+
+category==="ทั้งหมด"
+
+?
+
+foods
+
+:
+
+foods.filter(
+f=>f.category===category
+)
+
+);
+
+}
+
+
+
+/* =========================
+   เพิ่มอาหาร
+========================= */
+
+function addFood(id){
+
+const food=
+foods.find(
+f=>f.id===id
+);
+
+if(!food)return;
+
+
+const item=
+cart.find(
+x=>x.id===id
+);
+
+
+if(item){
+
+item.qty++;
+
+}else{
+
+cart.push({
+...food,
+qty:1
+});
+
+}
+
+
+updateCartCount();
+
+}
+
+
+
+function updateCartCount(){
+
+document
+.getElementById("cartCount")
+.textContent=
+
+cart.reduce(
+(s,x)=>s+x.qty,
+0
+);
+
+}
+
+
+
+/* =========================
+   ตะกร้า
+========================= */
+
+function openCart(){
+
+if(cart.length===0){
+
+alert(
+"ยังไม่มีอาหารในตะกร้า"
+);
+
+return;
+
+}
+
+
+renderCart();
+
+document
+.getElementById("cartModal")
+.style.display="flex";
+
+}
+
+
+
+function closeCart(){
+
+document
+.getElementById("cartModal")
+.style.display="none";
+
+}
+
+
+
+function renderCart(){
+
+const box=
+document.getElementById("cartItems");
+
+
+box.innerHTML=
+
+cart.map(item=>`
+
+<div class="cart-item">
+
+<div>
+
+<b>
+${escapeHtml(item.name)}
+</b>
+
+<br>
+
+<span class="small">
+
+${item.price} บาท/จาน
+
+</span>
+
+</div>
+
+
+<div class="qty">
+
+<button
+onclick="changeQuantity(${item.id},-1)">
+
+−
+
+</button>
+
+
+<b>
+${item.qty}
+</b>
+
+
+<button
+onclick="changeQuantity(${item.id},1)">
+
++
+
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+
+document
+.getElementById("cartTotal")
+.textContent=
+
+cart.reduce(
+(s,x)=>s+x.price*x.qty,
+0
+)
+.toLocaleString();
+
+}
+
+
+
+/* =========================
+   เพิ่มลดจำนวน
+========================= */
+
+function changeQuantity(id,amount){
+
+const item=
+cart.find(
+x=>x.id===id
+);
+
+if(!item)return;
+
+
+item.qty+=amount;
+
+
+if(item.qty<=0){
+
+cart=
+cart.filter(
+x=>x.id!==id
+);
+
+}
+
+
+updateCartCount();
+
+
+if(cart.length){
+
+renderCart();
+
+}else{
+
+closeCart();
+
+}
+
+}
+
+
+
+/* =========================
+   ระบบธนาคาร
+========================= */
+
+function getBankSettings(){
+
+return JSON.parse(
+
+localStorage.getItem(
+"bankSettings"
+)
+
+||
+
+'{"bankName":"","accountName":"","accountNumber":""}'
+
+);
+
+}
+
+
+
+function saveBankSettings(){
+
+const settings={
+
+bankName:
+document
+.getElementById("bankName")
+.value
+.trim(),
+
+accountName:
+document
+.getElementById("accountName")
+.value
+.trim(),
+
+accountNumber:
+document
+.getElementById("accountNumber")
+.value
+.trim()
+
+};
+
+
+if(
+!settings.bankName ||
+!settings.accountName ||
+!settings.accountNumber
+){
+
+alert(
+"กรุณากรอกข้อมูลบัญชีให้ครบ"
+);
+
+return;
+
+}
+
+
+localStorage.setItem(
+"bankSettings",
+JSON.stringify(settings)
+);
+
+
+alert(
+"บันทึกบัญชีเรียบร้อยแล้ว"
+);
+
+}
+
+
+
+function loadBankSettings(){
+
+const s=
+getBankSettings();
+
+
+document
+.getElementById("bankName")
+.value=
+s.bankName;
+
+
+document
+.getElementById("accountName")
+.value=
+s.accountName;
+
+
+document
+.getElementById("accountNumber")
+.value=
+s.accountNumber;
+
+}
+
+
+
+/* =========================
+   แสดงธนาคารให้ลูกค้า
+========================= */
+
+function toggleBankInfo(){
+
+const payment=
+document
+.getElementById("payment")
+.value;
+
+
+const box=
+document
+.getElementById("bankInfo");
+
+
+if(payment==="โอนเงิน"){
+
+box.style.display="block";
+
+
+const s=
+getBankSettings();
+
+
+if(
+s.bankName &&
+s.accountName &&
+s.accountNumber
+){
+
+document
+.getElementById("bankDetails")
+.innerHTML=
+
+`
+
+<div>
+🏦 ธนาคาร:
+<b>
+${escapeHtml(s.bankName)}
+</b>
+</div>
+
+<div>
+👤 ชื่อบัญชี:
+<b>
+${escapeHtml(s.accountName)}
+</b>
+</div>
+
+<div>
+💳 เลขบัญชี:
+<b>
+${escapeHtml(s.accountNumber)}
+</b>
+</div>
+
+`;
+
+}else{
+
+document
+.getElementById("bankDetails")
+.innerHTML=
+
+'<span style="color:#d33">ร้านยังไม่ได้ตั้งค่าบัญชีรับโอน</span>';
+
+}
+
+}else{
+
+box.style.display="none";
+
+}
+
+}
+
+
+
+/* =========================
+   คัดลอกเลขบัญชี
+========================= */
+
+async function copyBankAccount(){
+
+const s=
+getBankSettings();
+
+
+if(!s.accountNumber){
+
+alert(
+"ยังไม่มีเลขบัญชีสำหรับโอน"
+);
+
+return;
+
+}
+
+
+try{
+
+await navigator.clipboard.writeText(
+s.accountNumber
+);
+
+alert(
+"คัดลอกเลขบัญชีแล้ว"
+);
+
+}catch(e){
+
+const temp=
+document.createElement("textarea");
+
+temp.value=
+s.accountNumber;
+
+document.body.appendChild(temp);
+
+temp.select();
+
+document.execCommand("copy");
+
+temp.remove();
+
+alert(
+"คัดลอกเลขบัญชีแล้ว"
+);
+
+}
+
+}
+
+
+
+/* =========================
+   ยืนยันออเดอร์
+========================= */
+
+function confirmOrder(){
+
+if(!cart.length)return;
+
+
+const orderType=
+document
+.getElementById("orderType")
+.value;
+
+
+const table=
+document
+.getElementById("tableNumber")
+.value
+.trim();
+
+
+const payment=
+document
+.getElementById("payment")
+.value;
+
+
+const note=
+document
+.getElementById("note")
+.value
+.trim();
+
+
+if(
+orderType==="กินที่ร้าน"
+&&
+!table
+){
+
+alert(
+"กรุณาระบุโต๊ะ"
+);
+
+return;
+
+}
+
+
+
+/* โอนเงิน */
+
+if(payment==="โอนเงิน"){
+
+const bank=
+getBankSettings();
+
+
+if(
+!bank.bankName ||
+!bank.accountName ||
+!bank.accountNumber
+){
+
+alert(
+"ร้านยังไม่ได้ตั้งค่าบัญชีรับโอน"
+);
+
+return;
+
+}
+
+
+if(
+!confirm(
+"คุณได้โอนเงินตามยอดทั้งหมดแล้วใช่หรือไม่?\n\nหลังจากโอนแล้วให้กดยืนยันออเดอร์"
+)
+){
+
+return;
+
+}
+
+}
+
+
+
+const queue=
+String(
+Math.floor(
+100+
+Math.random()*900
+)
+);
+
+
+const order={
+
+queue:queue,
+
+items:
+cart.map(x=>({
+
+id:x.id,
+
+name:x.name,
+
+price:x.price,
+
+qty:x.qty
+
+})),
+
+total:
+cart.reduce(
+(s,x)=>s+x.price*x.qty,
+0
+),
+
+orderType:
+
+orderType,
+
+table:
+
+table,
+
+payment:
+
+payment,
+
+note:
+
+note,
+
+status:
+
+"รอรับออเดอร์",
+
+createdAt:
+
+new Date().toISOString(),
+
+time:
+
+new Date().toLocaleString(
+"th-TH"
+)
+
+};
+
+
+const orders=
+JSON.parse(
+localStorage.getItem("orders")
+||
+"[]"
+);
+
+
+orders.unshift(order);
+
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+
+cart=[];
+
+updateCartCount();
+
+closeCart();
+
+
+document
+.getElementById("queueNumber")
+.textContent=
+queue;
+
+
+document
+.getElementById("successPaymentText")
+.textContent=
+
+payment==="โอนเงิน"
+
+?
+
+"ชำระเงินโดยการโอนเงินแล้ว กรุณารอร้านตรวจสอบ"
+
+:
+
+"ชำระเงินสด กรุณารอเรียกคิวจากร้าน";
+
+
+document
+.getElementById("successModal")
+.style.display="flex";
+
+}
+
+
+
+function closeSuccess(){
+
+document
+.getElementById("successModal")
+.style.display="none";
+
+}
+
+
+
+/* =========================
+   เข้าหลังร้าน
+========================= */
+
+function openOwnerLogin(){
+
+document
+.getElementById("ownerPassword")
+.value="";
+
+
+document
+.getElementById("loginError")
+.style.display="none";
+
+
+document
+.getElementById("loginModal")
+.style.display="flex";
+
+
+setTimeout(
+()=>document
+.getElementById("ownerPassword")
+.focus(),
+100
+);
+
+}
+
+
+
+function closeOwnerLogin(){
+
+document
+.getElementById("loginModal")
+.style.display="none";
+
+}
+
+
+
+function loginOwner(){
+
+const password=
+document
+.getElementById("ownerPassword")
+.value;
+
+
+if(password==="1234"){
+
+closeOwnerLogin();
+
+showOwner();
+
+}else{
+
+document
+.getElementById("loginError")
+.style.display="block";
+
+}
+
+}
+
+
+
+function showOwner(){
+
+document
+.getElementById("customerPage")
+.style.display="none";
+
+
+document
+.getElementById("ownerPage")
+.style.display="block";
+
+
+renderOrders();
+
+renderMenuManager();
+
+loadBankSettings();
+
+window.scrollTo(
+0,
+0
+);
+
+}
+
+
+
+function showCustomer(){
+
+document
+.getElementById("ownerPage")
+.style.display="none";
+
+
+document
+.getElementById("customerPage")
+.style.display="block";
+
+
+renderCategories();
+
+showFoods(foods);
+
+window.scrollTo(
+0,
+0
+);
+
+}
+
+
+
+/* =========================
+   วันที่
+========================= */
+
+function getDateKey(dateValue){
+
+const d=
+new Date(dateValue);
+
+
+if(
+isNaN(
+d.getTime()
+)
+){
+
+return "";
+
+}
+
+
+return
+
+`${d.getFullYear()}-${String(
+d.getMonth()+1
+).padStart(2,"0")}-${String(
+d.getDate()
+).padStart(2,"0")}`;
+
+}
+
+
+
+function getTodayKey(){
+
+const d=
+new Date();
+
+
+return
+
+`${d.getFullYear()}-${String(
+d.getMonth()+1
+).padStart(2,"0")}-${String(
+d.getDate()
+).padStart(2,"0")}`;
+
+}
+
+
+
+/* =========================
+   ระบบการเงิน
+========================= */
+
+function renderFinance(){
+
+const orders=
+JSON.parse(
+localStorage.getItem("orders")
+||
+"[]"
+);
+
+
+const today=
+getTodayKey();
+
+
+const todayOrders=
+orders.filter(
+
+o=>
+getDateKey(
+o.createdAt ||
+o.time
+)
+===today
+
+);
+
+
+const todaySales=
+todayOrders.reduce(
+(sum,o)=>
+sum+
+Number(o.total||0),
+0
+);
+
+
+const cash=
+todayOrders
+.filter(
+o=>o.payment==="เงินสด"
+)
+.reduce(
+(sum,o)=>
+sum+
+Number(o.total||0),
+0
+);
+
+
+const transfer=
+todayOrders
+.filter(
+o=>o.payment==="โอนเงิน"
+)
+.reduce(
+(sum,o)=>
+sum+
+Number(o.total||0),
+0
+);
+
+
+const allSales=
+orders.reduce(
+(sum,o)=>
+sum+
+Number(o.total||0),
+0
+);
+
+
+document
+.getElementById("todaySales")
+.textContent=
+todaySales.toLocaleString()
++
+" บาท";
+
+
+document
+.getElementById("todayOrders")
+.textContent=
+todayOrders.length
+.toLocaleString();
+
+
+document
+.getElementById("todayCash")
+.textContent=
+cash.toLocaleString()
++
+" บาท";
+
+
+document
+.getElementById("todayTransfer")
+.textContent=
+transfer.toLocaleString()
++
+" บาท";
+
+
+document
+.getElementById("allTimeSales")
+.textContent=
+allSales.toLocaleString()
++
+" บาท";
+
+}
+
+
+
+/* =========================
+   แสดงออเดอร์
+========================= */
+
+function renderOrders(){
+
+renderFinance();
+
+
+const box=
+document
+.getElementById("orders");
+
+
+const orders=
+JSON.parse(
+localStorage.getItem("orders")
+||
+"[]"
+);
+
+
+if(!orders.length){
+
+box.innerHTML=
+
+'<div class="order-card empty">ยังไม่มีออเดอร์</div>';
+
+return;
+
+}
+
+
+box.innerHTML=
+
+orders.map(
+(o,index)=>`
+
+<div class="order-card">
+
+
+<div class="order-head">
+
+<div>
+
+<b>
+คิว #${escapeHtml(o.queue)}
+</b>
+
+<br>
+
+<span class="small">
+${escapeHtml(o.time)}
+</span>
+
+</div>
+
+
+<span class="status">
+${escapeHtml(o.status)}
+</span>
+
+</div>
+
+
+
+<p>
+
+${o.items.map(
+
+i=>
+`${escapeHtml(i.name)}
+× ${i.qty}`
+
+).join("<br>")}
+
+</p>
+
+
+
+<p>
+
+<b>
+รวม
+${Number(o.total).toLocaleString()}
+บาท
+</b>
+
+<br>
+
+${escapeHtml(o.orderType)}
+
+${o.table
+?
+` • ${escapeHtml(o.table)}`
+:
+""
+}
+
+<br>
+
+💳
+${escapeHtml(o.payment)}
+
+
+${
+o.payment==="โอนเงิน"
+?
+"<br>🏦 ลูกค้าเลือกชำระโดยโอนเงิน"
+:
+""
+}
+
+
+${
+o.note
+?
+`<br>📝 ${escapeHtml(o.note)}`
+:
+""
+}
+
+</p>
+
+
+
+<div class="order-buttons">
+
+
+<button
+class="accept"
+onclick="changeStatus(${index},'รอรับออเดอร์')">
+
+รอรับ
+
+</button>
+
+
+<button
+class="accept"
+onclick="changeStatus(${index},'กำลังทำ')">
+
+รับออเดอร์
+
+</button>
+
+
+<button
+class="done"
+onclick="changeStatus(${index},'เสร็จแล้ว')">
+
+เสร็จแล้ว
+
+</button>
+
+
+<button
+class="danger"
+onclick="deleteOrder(${index})">
+
+ลบ
+
+</button>
+
+
+</div>
+
+</div>
+
+`
+
+).join("");
+
+}
+
+
+
+/* =========================
+   เปลี่ยนสถานะ
+========================= */
+
+function changeStatus(index,status){
+
+const orders=
+JSON.parse(
+localStorage.getItem("orders")
+||
+"[]"
+);
+
+
+if(!orders[index])return;
+
+
+orders[index].status=
+status;
+
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+
+renderOrders();
+
+}
+
+
+
+/* =========================
+   ลบออเดอร์
+========================= */
+
+function deleteOrder(index){
+
+if(
+!confirm(
+"ต้องการลบออเดอร์นี้ใช่หรือไม่?"
+)
+){
+
+return;
+
+}
+
+
+const orders=
+JSON.parse(
+localStorage.getItem("orders")
+||
+"[]"
+);
+
+
+orders.splice(
+index,
+1
+);
+
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+
+renderOrders();
+
+}
+
+
+
+/* =========================
+   เพิ่ม / แก้ไขเมนู
+========================= */
+
+function saveFood(){
+
+const name=
+document
+.getElementById("foodName")
+.value
+.trim();
+
+
+const price=
+Number(
+document
+.getElementById("foodPrice")
+.value
+);
+
+
+const category=
+document
+.getElementById("foodCategory")
+.value;
+
+
+const image=
+document
+.getElementById("foodImage")
+.value
+.trim();
+
+
+if(
+!name ||
+price<0
+){
+
+alert(
+"กรุณากรอกชื่อเมนูและราคา"
+);
+
+return;
+
+}
+
+
+
+if(editFoodId!==null){
+
+const food=
+foods.find(
+f=>f.id===editFoodId
+);
+
+
+if(food){
+
+food.name=name;
+
+food.price=price;
+
+food.category=category;
+
+food.image=image;
+
+}
+
+
+editFoodId=null;
+
+
+document
+.getElementById("saveFoodBtn")
+.textContent=
+"➕ เพิ่มเมนู";
+
+
+}else{
+
+
+foods.push({
+
+id:Date.now(),
+
+name:name,
+
+price:price,
+
+category:category,
+
+image:image
+
+});
+
+}
+
+
+saveFoods();
+
+clearFoodForm();
+
+renderMenuManager();
+
+renderCategories();
+
+showFoods(foods);
+
+}
+
+
+
+/* =========================
+   แก้ไขเมนู
+========================= */
+
+function editFood(id){
+
+const food=
+foods.find(
+f=>f.id===id
+);
+
+
+if(!food)return;
+
+
+editFoodId=id;
+
+
+document
+.getElementById("foodName")
+.value=
+food.name;
+
+
+document
+.getElementById("foodPrice")
+.value=
+food.price;
+
+
+document
+.getElementById("foodCategory")
+.value=
+food.category;
+
+
+document
+.getElementById("foodImage")
+.value=
+food.image||"";
+
+
+document
+.getElementById("saveFoodBtn")
+.textContent=
+"💾 บันทึกการแก้ไข";
+
+
+window.scrollTo({
+
+top:
+document
+.querySelector(".menu-manager")
+.offsetTop-20,
+
+behavior:"smooth"
+
+});
+
+}
+
+
+
+/* =========================
+   ลบเมนู
+========================= */
+
+function deleteFood(id){
+
+const food=
+foods.find(
+f=>f.id===id
+);
+
+
+if(!food)return;
+
+
+if(
+!confirm(
+`ลบเมนู "${food.name}" ใช่หรือไม่?`
+)
+){
+
+return;
+
+}
+
+
+foods=
+foods.filter(
+f=>f.id!==id
+);
+
+
+saveFoods();
+
+renderMenuManager();
+
+renderCategories();
+
+showFoods(foods);
+
+}
+
+
+
+/* =========================
+   ล้างฟอร์ม
+========================= */
+
+function clearFoodForm(){
+
+document
+.getElementById("foodName")
+.value="";
+
+
+document
+.getElementById("foodPrice")
+.value="";
+
+
+document
+.getElementById("foodImage")
+.value="";
+
+
+editFoodId=null;
+
+
+document
+.getElementById("saveFoodBtn")
+.textContent=
+"➕ เพิ่มเมนู";
+
+}
+
+
+
+/* =========================
+   รายการเมนูหลังร้าน
+========================= */
+
+function renderMenuManager(){
+
+const box=
+document
+.getElementById("menuManager");
+
+
+if(!foods.length){
+
+box.innerHTML=
+'<div class="empty">ยังไม่มีเมนู</div>';
+
+return;
+
+}
+
+
+box.innerHTML=
+
+foods.map(f=>`
+
+<div class="manager-row">
+
+
+<div class="manager-info">
+
+
+<span class="manager-emoji">
+
+
+${
+f.image
+
+?
+
+`<img
+src="${escapeAttr(f.image)}"
+alt=""
+style="width:48px;height:48px;object-fit:cover;border-radius:10px"
+onerror="this.style.display='none';this.parentElement.textContent='🍽️'"
+>`
+
+:
+
+"🍽️"
+
+}
+
+</span>
+
+
+<div>
+
+<b>
+${escapeHtml(f.name)}
+</b>
+
+<br>
+
+<span class="small">
+
+${Number(f.price).toLocaleString()}
+บาท
+
+•
+
+${escapeHtml(f.category)}
+
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="manager-actions">
+
+
+<button
+class="accept"
+onclick="editFood(${f.id})">
+
+✏️ แก้ไข
+
+</button>
+
+
+<button
+class="danger"
+onclick="deleteFood(${f.id})">
+
+🗑️ ลบ
+
+</button>
+
+
+</div>
+
+
+</div>
+
+`).join("");
+
+}
+
+
+
+/* =========================
+   ป้องกัน HTML
+========================= */
+
+function escapeHtml(value){
+
+return String(value)
+.replace(
+/[&<>"']/g,
+
+m=>
+({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[m])
+
+);
+
+}
+
+
+
+function escapeAttr(value){
+
+return escapeHtml(value)
+.replace(
+/`/g,
+"&#096;"
+);
+
+}
+
+
+
+/* =========================
+   เริ่มระบบ
+========================= */
+
+renderCategories();
+
+showFoods(foods);
+
+updateCartCount();
+
+</script>
+
+</body>
+</html>
